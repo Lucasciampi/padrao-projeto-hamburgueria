@@ -6,5 +6,7 @@ Aplicação dos padrões Singleton, AbstractFactory, FectoryMethod, Bridge e Dec
 
 Diagrama de Classes:
 
-<img width="2104" height="1173" alt="Diagrama 5padroes drawio" src="https://github.com/user-attachments/assets/45f499be-d1de-4248-8229-eec917c6412d" />
+<img width="2151" height="1198" alt="Diagrama 5padroes drawio" src="https://github.com/user-attachments/assets/a62b5b60-e360-4b0e-b221-bf9250555447" />
+
+
 

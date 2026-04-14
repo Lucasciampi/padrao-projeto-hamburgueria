@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HamburguerDecoratorFactoryTest {
 
     @Test
-    void deveRetornarExcecaoParaChamadoInexistente() {
+    void deveRetornarExcecaoParaIngredienteInexistente() {
         try {
             HamburguerDecoratorFactory.getInstance().obterIngrediente("Carne de Frango", new HamburguerBase());
             fail();
@@ -17,7 +17,7 @@ class HamburguerDecoratorFactoryTest {
     }
 
     @Test
-    void deveRetornarExcecaoParaChamadoInvalido() {
+    void deveRetornarExcecaoParaIngredienteInvalido() {
         try {
             HamburguerDecoratorFactory.getInstance().obterIngrediente("Tomate", new HamburguerBase());
             fail();

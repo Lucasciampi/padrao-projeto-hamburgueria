@@ -1,15 +1,15 @@
 package org.example;
 
-public class ComboEspecialFactory implements ComboFactory {
+public class HamburguerEspecialFactory implements HamburguerFactory {
 
-    private static ComboEspecialFactory instance;
+    private static HamburguerEspecialFactory instance;
 
-    private ComboEspecialFactory() {
+    private HamburguerEspecialFactory() {
     }
 
-    public static ComboEspecialFactory getInstance() {
+    public static HamburguerEspecialFactory getInstance() {
         if (instance == null) {
-            instance = new ComboEspecialFactory();
+            instance = new HamburguerEspecialFactory();
         }
         return instance;
     }
@@ -24,13 +24,4 @@ public class ComboEspecialFactory implements ComboFactory {
         return lanche;
     }
 
-    @Override
-    public String prepararAcompanhamento() {
-        return "Batata Rústica";
-    }
-
-    @Override
-    public String prepararBebida() {
-        return "Milkshake";
-    }
 }

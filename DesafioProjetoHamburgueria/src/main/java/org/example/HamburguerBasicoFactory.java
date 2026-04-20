@@ -1,15 +1,15 @@
 package org.example;
 
-public class ComboBasicoFactory implements ComboFactory{
+public class HamburguerBasicoFactory implements HamburguerFactory {
 
-    private static ComboBasicoFactory instance;
+    private static HamburguerBasicoFactory instance;
 
 
-    private ComboBasicoFactory() {}
+    private HamburguerBasicoFactory() {}
 
-    public static ComboBasicoFactory getInstance() {
+    public static HamburguerBasicoFactory getInstance() {
         if (instance == null) {
-            instance = new ComboBasicoFactory();
+            instance = new HamburguerBasicoFactory();
         }
         return instance;
     }
@@ -21,16 +21,6 @@ public class ComboBasicoFactory implements ComboFactory{
         lanche = HamburguerDecoratorFactory.getInstance().obterIngrediente("Alface", lanche);
 
         return lanche;
-    }
-
-    @Override
-    public String prepararAcompanhamento() {
-        return "Batata Frita";
-    }
-
-    @Override
-    public String prepararBebida() {
-        return "Refrigerante";
     }
 
 }

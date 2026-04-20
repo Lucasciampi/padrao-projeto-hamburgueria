@@ -8,7 +8,7 @@ public class PedidoTest {
 
     @Test
     public void deveRetornarDescricaoDoComboEspecial() {
-        ComboFactory factory = ComboEspecialFactory.getInstance();
+        HamburguerFactory factory = HamburguerEspecialFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         String descricaoEsperada = "Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
@@ -16,14 +16,14 @@ public class PedidoTest {
 
     @Test
     public void deveRetornarPrecoDoComboEspecial() {
-        ComboFactory factory = ComboEspecialFactory.getInstance();
+        HamburguerFactory factory = HamburguerEspecialFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         assertEquals(27.00, pedido.getLanche().getPreco());
     }
 
     @Test
     public void deveRetornarDescricaomDoComboBasico() {
-        ComboFactory factory = ComboBasicoFactory.getInstance();
+        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
 
         String descricaoEsperada = "Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface";
@@ -32,7 +32,7 @@ public class PedidoTest {
 
     @Test
     public void deveRetornarPrecoDoComboBasico() {
-        ComboFactory factory = ComboBasicoFactory.getInstance();
+        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         assertEquals(14.50, pedido.getLanche().getPreco());
     }

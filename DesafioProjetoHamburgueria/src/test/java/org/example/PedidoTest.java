@@ -1,37 +1,43 @@
 package org.example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PedidoTest {
 
+    private HamburguerFactory factory;
+    private Pedido pedido;
+
+    @BeforeEach
+    void setUp() {
+        factory = HamburguerEspecialFactory.getInstance();
+        pedido = new Pedido(factory);
+    }
+
     @Test
-    public void deveRetornarDescricaoDoComboEspecial() {
-        HamburguerFactory factory = HamburguerEspecialFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveRetornarDescricaoDoComboEspecial() {
         String descricaoEsperada = "Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
     @Test
-    public void deveRetornarPrecoDoComboEspecial() {
-        HamburguerFactory factory = HamburguerEspecialFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveRetornarPrecoDoComboEspecial() {
         assertEquals(27.00, pedido.getLanche().getPreco());
     }
 
     @Test
-    public void deveRetornarDescricaomDoComboBasico() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
+    void deveRetornarDescricaomDoComboBasico() {
+        factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         String descricaoEsperada = "Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
     @Test
-    public void deveRetornarPrecoDoComboBasico() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
+    void deveRetornarPrecoDoComboBasico() {
+        factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         assertEquals(14.50, pedido.getLanche().getPreco());
     }
@@ -40,58 +46,44 @@ public class PedidoTest {
     // Pedido aceito
 
     @Test
-    public void naoDeveAceitarPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void devePrepararPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void devePrepararPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertTrue(pedido.preparar());
-        assertEquals(PedidoEstadoEmPreparacao.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Em Preparação", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void naoDeveEstarEmRotaPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEstarEmRotaPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void naoDeveEntregarPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEntregarPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.entregue());
     }
 
     @Test
-    public void naoDeveDevolverPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void naoDeveCancelarPedidoAceito() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveCancelarPedidoAceito() {
         pedido.setEstado(PedidoEstadoAceito.getInstance());
         assertFalse(pedido.cancelar());
     }
@@ -99,239 +91,183 @@ public class PedidoTest {
     // Pedido em preparacao
 
     @Test
-    public void naoDeveAceitarPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePreparPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePreparPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void deveFicarProntoPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveFicarProntoPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertTrue(pedido.pronto());
-        assertEquals(PedidoEstadoPronto.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Pronto", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void naoDeveFicarEmRotaPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarEmRotaPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void naoDeveEntregarPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEntregarPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertFalse(pedido.entregue());
     }
 
     @Test
-    public void naoDeveDevolverPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void deveCancelarPedidoEmPreparacao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveCancelarPedidoEmPreparacao() {
         pedido.setEstado(PedidoEstadoEmPreparacao.getInstance());
         assertTrue(pedido.cancelar());
-        assertEquals(PedidoEstadoCancelado.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Cancelado", pedido.getEstado().getUltimaNotificacao());
     }
 
     // Pedido pronto
 
     @Test
-    public void naoDeveAceitarPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePrepararPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePrepararPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void deveFicarEmRotaPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveFicarEmRotaPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertTrue(pedido.emRota());
-        assertEquals(PedidoEstadoEmRota.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Em Rota", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void deveEntregarPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveEntregarPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertTrue(pedido.entregue());
-        assertEquals(PedidoEstadoEntregue.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Entregue", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void naoDeveDevolverPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void deveCancelarPedidoPronto() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveCancelarPedidoPronto() {
         pedido.setEstado(PedidoEstadoPronto.getInstance());
         assertTrue(pedido.cancelar());
-        assertEquals(PedidoEstadoCancelado.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Cancelado", pedido.getEstado().getUltimaNotificacao());
     }
 
     // Pedido em rota
 
     @Test
-    public void naoDeveAceitarPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePrepararPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePrepararPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void naoDeveFicarEmRotaPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarEmRotaPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void deveEntregarPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveEntregarPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertTrue(pedido.entregue());
-        assertEquals(PedidoEstadoEntregue.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Entregue", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void naoDeveDevolverPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void deveCancelarPedidoEmRota() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveCancelarPedidoEmRota() {
         pedido.setEstado(PedidoEstadoEmRota.getInstance());
         assertTrue(pedido.cancelar());
-        assertEquals(PedidoEstadoCancelado.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Cancelado", pedido.getEstado().getUltimaNotificacao());
     }
 
     // Pedido entregue
 
     @Test
-    public void naoDeveAceitarPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePrepararPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePrepararPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void naoDeveFicarEmRotaPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarEmRotaPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void naoDeveEntregarPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEntregarPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.entregue());
     }
 
     @Test
-    public void deveDevolverPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveDevolverPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertTrue(pedido.devolver());
-        assertEquals(PedidoEstadoDevolucao.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Devolução", pedido.getEstado().getUltimaNotificacao());
     }
 
     @Test
-    public void naoDeveCancelarPedidoEntregue() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveCancelarPedidoEntregue() {
         pedido.setEstado(PedidoEstadoEntregue.getInstance());
         assertFalse(pedido.cancelar());
     }
@@ -339,118 +275,108 @@ public class PedidoTest {
     // Pedido devolucao
 
     @Test
-    public void naoDeveAceitarPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePrepararPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePrepararPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void naoDeveFicarEmRotaPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarEmRotaPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void naoDeveEntregarPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEntregarPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.entregue());
     }
 
     @Test
-    public void naoDeveDevolverPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void deveCancelarPedidoDevolucao() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void deveCancelarPedidoDevolucao() {
         pedido.setEstado(PedidoEstadoDevolucao.getInstance());
         assertTrue(pedido.cancelar());
-        assertEquals(PedidoEstadoCancelado.getInstance(), pedido.getEstado());
+        assertEquals("O pedido está na etapa: Cancelado", pedido.getEstado().getUltimaNotificacao());
     }
 
     // Pedido cancelado
 
     @Test
-    public void naoDeveAceitarPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveAceitarPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.aceitar());
     }
 
     @Test
-    public void naoDevePrepararPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDevePrepararPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.preparar());
     }
 
     @Test
-    public void naoDeveFicarProntoPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarProntoPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.pronto());
     }
 
     @Test
-    public void naoDeveFicarEmRotaPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveFicarEmRotaPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.emRota());
     }
 
     @Test
-    public void naoDeveEntregarPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveEntregarPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.entregue());
     }
 
     @Test
-    public void naoDeveDevolverPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveDevolverPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.devolver());
     }
 
     @Test
-    public void naoDeveCancelarPedidoCancelado() {
-        HamburguerFactory factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
+    void naoDeveCancelarPedidoCancelado() {
         pedido.setEstado(PedidoEstadoCancelado.getInstance());
         assertFalse(pedido.cancelar());
+    }
+
+    // Observer
+
+    @Test
+    void deveNotificarOEstadoInicialDoPedidoComoAceito(){
+        pedido.setEstado(pedido.getEstado());
+        assertEquals("O pedido está na etapa: Aceito", pedido.getEstado().getUltimaNotificacao());
+    }
+
+    @Test
+    void deveNotificarPedidos(){
+        Pedido pedido1 = new Pedido(factory);
+        Pedido pedido2 = new Pedido(factory);
+        pedido1.setEstado(PedidoEstadoCancelado.getInstance());
+        pedido2.setEstado(PedidoEstadoEmRota.getInstance());
+        assertEquals("O pedido está na etapa: Cancelado", pedido1.getEstado().getUltimaNotificacao());
+        assertEquals("O pedido está na etapa: Em Rota", pedido2.getEstado().getUltimaNotificacao());
     }
 
 }

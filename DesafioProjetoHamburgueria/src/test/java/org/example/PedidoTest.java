@@ -17,29 +17,17 @@ public class PedidoTest {
     }
 
     @Test
-    void deveRetornarDescricaoDoComboEspecial() {
+    void deveRetornarDescricaoDoHamburguerEspecial() {
         String descricaoEsperada = "Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
     @Test
-    void deveRetornarPrecoDoComboEspecial() {
-        assertEquals(27.00, pedido.getLanche().getPreco());
-    }
-
-    @Test
-    void deveRetornarDescricaomDoComboBasico() {
+    void deveRetornarDescricaomDoHamburguerBasico() {
         factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         String descricaoEsperada = "Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
-    }
-
-    @Test
-    void deveRetornarPrecoDoComboBasico() {
-        factory = HamburguerBasicoFactory.getInstance();
-        Pedido pedido = new Pedido(factory);
-        assertEquals(14.50, pedido.getLanche().getPreco());
     }
 
     // Testes dos Estados de Pedido
@@ -377,6 +365,44 @@ public class PedidoTest {
         pedido2.setEstado(PedidoEstadoEmRota.getInstance());
         assertEquals("O pedido está na etapa: Cancelado", pedido1.getEstado().getUltimaNotificacao());
         assertEquals("O pedido está na etapa: Em Rota", pedido2.getEstado().getUltimaNotificacao());
+    }
+
+    @Test
+    void deveProcessarPagamentoComPix(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(new FormaPagamentoPix());
+        String recibo = calculador.realizarPagamento(pedido);
+        assertEquals("Pagamento de R$ 27.0 processado via PIX.", recibo);
+    }
+
+    @Test
+    void deveProcessarPagamentoComCartao(){
+        // Hamburguer Básico
+        factory = HamburguerBasicoFactory.getInstance();
+        Pedido pedido = new Pedido(factory);
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(new FormaPagamentoCartao());
+        String recibo = calculador.realizarPagamento(pedido);
+        assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito.", recibo);
+    }
+
+    @Test
+    void deveProcessarPagamentoComDinheiro(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(new FormaPagamentoDinheiro());
+        String recibo = calculador.realizarPagamento(pedido);
+        assertEquals("Pagamento de R$ 27.0 será realizado em Dinheiro.", recibo);
+    }
+
+    @Test
+    void nãoDeveConterFormaDePagamento(){
+        try {
+            CalcularValorPagamento calculador = new CalcularValorPagamento();
+            calculador.realizarPagamento(null);
+            fail();
+        } catch (IllegalStateException e) {
+            assertEquals("Forma de pagamento não definida.", e.getMessage());
+        }
     }
 
 }

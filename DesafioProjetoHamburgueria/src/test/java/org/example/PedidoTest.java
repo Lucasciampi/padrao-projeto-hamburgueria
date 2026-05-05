@@ -9,11 +9,17 @@ public class PedidoTest {
 
     private HamburguerFactory factory;
     private Pedido pedido;
+    DescontoBaixo descontoBaixo;
+    DescontoMedio descontoMedio;
+    DescontoAlto descontoAlto;
 
     @BeforeEach
     void setUp() {
         factory = HamburguerEspecialFactory.getInstance();
         pedido = new Pedido(factory);
+        descontoAlto = new DescontoAlto(null);
+        descontoMedio = new DescontoMedio(descontoAlto);
+        descontoBaixo = new DescontoBaixo(descontoMedio);
     }
 
     @Test
@@ -370,9 +376,8 @@ public class PedidoTest {
     @Test
     void deveProcessarPagamentoComPix(){
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(new FormaPagamentoPix());
-        String recibo = calculador.realizarPagamento(pedido);
-        assertEquals("Pagamento de R$ 27.0 processado via PIX.", recibo);
+        calculador.setFormaPagamento(FormaPagamentoPix.getInstance());
+        assertEquals("Pagamento de R$ 27.0 processado via PIX.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -381,17 +386,15 @@ public class PedidoTest {
         factory = HamburguerBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(new FormaPagamentoCartao());
-        String recibo = calculador.realizarPagamento(pedido);
-        assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito.", recibo);
+        calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
+        assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito.", calculador.realizarPagamento(pedido));
     }
 
     @Test
     void deveProcessarPagamentoComDinheiro(){
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(new FormaPagamentoDinheiro());
-        String recibo = calculador.realizarPagamento(pedido);
-        assertEquals("Pagamento de R$ 27.0 será realizado em Dinheiro.", recibo);
+        calculador.setFormaPagamento(FormaPagamentoDinheiro.getInstance());
+        assertEquals("Pagamento de R$ 27.0 será realizado em Dinheiro.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -404,5 +407,30 @@ public class PedidoTest {
             assertEquals("Forma de pagamento não definida.", e.getMessage());
         }
     }
+
+    @Test
+    void deveProcessarPagamentoCartaoComDescontoBaixo(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        assertEquals("Pagamento de R$ 25.65 processado via Cartão de Crédito.", calculador.realizarPagamento(pedido));
+    }
+
+    @Test
+    void deveProcessarPagamentoDinheiroComDescontoMedio(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoDinheiro.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        assertEquals("Pagamento de R$ 24.3 será realizado em Dinheiro.", calculador.realizarPagamento(pedido));
+    }
+
+    @Test
+    void deveProcessarPagamentoPixComDescontoAlto(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoPix.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        assertEquals("Pagamento de R$ 22.95 processado via PIX.", calculador.realizarPagamento(pedido));
+    }
+
 
 }

@@ -387,7 +387,7 @@ public class PedidoTest {
         Pedido pedido = new Pedido(factory);
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
-        assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito.", calculador.realizarPagamento(pedido));
+        assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -395,6 +395,13 @@ public class PedidoTest {
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoDinheiro.getInstance());
         assertEquals("Pagamento de R$ 27.0 será realizado em Dinheiro.", calculador.realizarPagamento(pedido));
+    }
+
+    @Test
+    void deveProcessarPagamentoCartaoParcelado(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoCartaoParcelado.getInstance());
+        assertEquals("Pagamento de R$ 27.0 processado via Cartão de Crédito parcelado.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -413,7 +420,7 @@ public class PedidoTest {
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
-        assertEquals("Pagamento de R$ 25.65 processado via Cartão de Crédito.", calculador.realizarPagamento(pedido));
+        assertEquals("Pagamento de R$ 25.65 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -432,5 +439,12 @@ public class PedidoTest {
         assertEquals("Pagamento de R$ 22.95 processado via PIX.", calculador.realizarPagamento(pedido));
     }
 
+    @Test
+    void deveProcessarPagamentoCartaoParceladoSemDesconto(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoCartaoParcelado.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        assertEquals("Pagamento de R$ 27.0 processado via Cartão de Crédito parcelado.", calculador.realizarPagamento(pedido));
+    }
 
 }

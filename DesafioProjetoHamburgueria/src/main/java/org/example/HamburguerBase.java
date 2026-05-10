@@ -21,4 +21,12 @@ public class HamburguerBase implements Hamburguer {
         return this.preco;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
 }

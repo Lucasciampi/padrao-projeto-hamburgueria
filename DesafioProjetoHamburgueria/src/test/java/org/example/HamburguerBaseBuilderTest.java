@@ -1,16 +1,23 @@
 package org.example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HamburguerBaseBuildTest {
+class HamburguerBaseBuilderTest {
+
+    private HamburguerBaseBuilder hamburguerBaseBuilder;
+
+    @BeforeEach
+    void setUp() {
+        hamburguerBaseBuilder = new HamburguerBaseBuilder();
+    }
 
     @Test
     void deveRetornarExcecaoParaHamburguerBaseSemDescricao() {
         try {
-            HamburguerBaseBuild hamburguerBaseBuild = new HamburguerBaseBuild();
-            HamburguerBase hamburguerBase = hamburguerBaseBuild
+            HamburguerBase hamburguerBase = hamburguerBaseBuilder
                     .setPreco(10.0)
                     .build();
             fail();
@@ -22,8 +29,7 @@ class HamburguerBaseBuildTest {
     @Test
     void deveRetornarExcecaoParaHamburguerBaseSemPreco() {
         try {
-            HamburguerBaseBuild hamburguerBaseBuild = new HamburguerBaseBuild();
-            HamburguerBase hamburguerBase = hamburguerBaseBuild
+            HamburguerBase hamburguerBase = hamburguerBaseBuilder
                     .setDescricao("Pão de Batata")
                     .build();
             fail();
@@ -34,8 +40,7 @@ class HamburguerBaseBuildTest {
 
     @Test
     void deveRetornarHamburguerBaseValido() {
-        HamburguerBaseBuild hamburguerBaseBuild = new HamburguerBaseBuild();
-        HamburguerBase hamburguerBase = hamburguerBaseBuild
+        HamburguerBase hamburguerBase = hamburguerBaseBuilder
                 .setDescricao("Pão de Batata")
                 .setPreco(10.0)
                 .build();

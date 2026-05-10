@@ -1,10 +1,10 @@
 package org.example;
 
-public class HamburguerBaseBuild {
+public class HamburguerBaseBuilder {
 
     private HamburguerBase hamburguerBase;
 
-    public HamburguerBaseBuild() {
+    public HamburguerBaseBuilder() {
         this.hamburguerBase = new HamburguerBase();
     }
 
@@ -18,12 +18,12 @@ public class HamburguerBaseBuild {
         return hamburguerBase;
     }
 
-    public HamburguerBaseBuild setDescricao(String descricao) {
+    public HamburguerBaseBuilder setDescricao(String descricao) {
         hamburguerBase.setDescricao(descricao);
         return this;
     }
 
-    public HamburguerBaseBuild setPreco(double preco) {
+    public HamburguerBaseBuilder setPreco(double preco) {
         hamburguerBase.setPreco(preco);
         return this;
     }

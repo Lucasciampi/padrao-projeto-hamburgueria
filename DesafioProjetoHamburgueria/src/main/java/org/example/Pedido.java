@@ -63,6 +63,10 @@ public class Pedido extends Observable {
         notifyObservers();
     }
 
+    public boolean verificarPendencias() {
+        return PedidoFacade.verificarPendencias(this);
+    }
+
     public String toString() {
         return this.getNomeEstado();
     }

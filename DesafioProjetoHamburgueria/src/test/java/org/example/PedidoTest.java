@@ -447,4 +447,21 @@ public class PedidoTest {
         assertEquals("Pagamento de R$ 27.0 processado via Cartão de Crédito parcelado.", calculador.realizarPagamento(pedido));
     }
 
+    @Test
+    void deveRetornarPendenciaPagamento() {
+        PendenciasPagamento.getInstance().addPedidoPendente(pedido);
+        assertEquals(false,pedido.verificarPendencias());
+    }
+
+    @Test
+    void deveRetornarPendenciaEntrega() {
+        PendenciasEntrega.getInstance().addPedidoPendente(pedido);
+        assertEquals(false,pedido.verificarPendencias());
+    }
+
+    @Test
+    void deveRetornarPedidoSemPendencias() {
+        assertEquals(true,pedido.verificarPendencias());
+    }
+
 }

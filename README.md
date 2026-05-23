@@ -11,7 +11,8 @@ Aplicação dos padrões Singleton, AbstractFactory, FectoryMethod, Bridge, Deco
 
 *Diagrama de Classes:*
 
-<img width="2876" height="1698" alt="Diagramas-Hamburgueria drawio" src="https://github.com/user-attachments/assets/4b06d4f5-bf39-4133-8474-bb6db314dd1c" />
+<img width="2877" height="1742" alt="Diagramas-Hamburgueria drawio (1)" src="https://github.com/user-attachments/assets/3da4af74-aa73-4adc-a8cd-38d18634d925" />
+
 
 
 

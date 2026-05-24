@@ -2,7 +2,7 @@
 
 Projeto destinado a estudo acadêmico de Arquitetura e Projeto de Software.
 
-Aplicação dos padrões Singleton, AbstractFactory, FectoryMethod, Bridge, Decorator, State, Observer, Strategy, ChainOfResponsability, Builder, Composite, Template Method, Mediator, Facade, Memento e Prototype em um contexto de uma Hamburgueria.
+Aplicação dos padrões Singleton, AbstractFactory, FectoryMethod, Bridge, Decorator, State, Observer, Strategy, ChainOfResponsability, Builder, Composite, Template Method, Mediator, Facade, Memento, Prototype e Flyweight em um contexto de uma Hamburgueria.
 
 *Diagrama de Estado do Pedido:*
 
@@ -11,7 +11,8 @@ Aplicação dos padrões Singleton, AbstractFactory, FectoryMethod, Bridge, Deco
 
 *Diagrama de Classes:*
 
-<img width="3127" height="2064" alt="Diagramas-Hamburgueria drawio" src="https://github.com/user-attachments/assets/17f53f09-a56f-4dbb-a12c-295b69d914a5" />
+<img width="3730" height="2065" alt="Diagramas-Hamburgueria drawio" src="https://github.com/user-attachments/assets/a3755185-5436-4199-b6d5-89f8e89b5405" />
+
 
 
 

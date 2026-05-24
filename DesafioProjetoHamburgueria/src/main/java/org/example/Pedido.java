@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Observable;
 
-public class Pedido extends Observable {
+public class Pedido extends Observable implements Cloneable {
 
     private Hamburguer lanche;
     private PedidoEstado estado;
@@ -65,6 +65,13 @@ public class Pedido extends Observable {
 
     public boolean verificarPendencias() {
         return PedidoFacade.verificarPendencias(this);
+    }
+
+    @Override
+    public Pedido clone() throws CloneNotSupportedException {
+        Pedido pedidoClone = (Pedido) super.clone();
+        pedidoClone.setEstado(PedidoEstadoAceito.getInstance());
+        return pedidoClone;
     }
 
     public String toString() {

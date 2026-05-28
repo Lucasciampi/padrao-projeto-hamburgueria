@@ -1,9 +1,10 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class CategoriaCardapio extends ItemCardapio {
+public class CategoriaCardapio extends ItemCardapio implements Iterable<ItemCardapio> {
 
     private List<ItemCardapio> items = new ArrayList<>();
 
@@ -22,6 +23,11 @@ public class CategoriaCardapio extends ItemCardapio {
             conteudo += item.getConteudo();
         }
         return conteudo;
+    }
+
+    @Override
+    public Iterator<ItemCardapio> iterator() {
+        return items.iterator();
     }
 
 }

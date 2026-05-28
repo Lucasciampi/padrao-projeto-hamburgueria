@@ -14,7 +14,7 @@ class CardapioTest {
 
         CategoriaCardapio categoriaCardapio2 = new CategoriaCardapio("Hambúrgueres");
         ItemSimples itemSimples21 = new ItemSimples("HamgurguerBasico", 14.50);
-        ItemSimples itemSimples22 = new ItemSimples("HamgurguerPremium", 27.00);
+        ItemSimples itemSimples22 = new ItemSimples("HamgurguerEspecial", 27.00);
         categoriaCardapio2.addItem(itemSimples21);
         categoriaCardapio2.addItem(itemSimples22);
 
@@ -37,7 +37,7 @@ class CardapioTest {
                 "Refrigerante - R$ 2.5\n" +
                 "Categoria: Hambúrgueres\n" +
                 "HamgurguerBasico - R$ 14.5\n" +
-                "HamgurguerPremium - R$ 27.0\n" +
+                "HamgurguerEspecial - R$ 27.0\n" +
                 "Categoria: Acompanhamento\n" +
                 "Batata Frita - R$ 4.0\n" +
                 "Batata Rustica - R$ 6.0\n", cardapio.getCardapio());

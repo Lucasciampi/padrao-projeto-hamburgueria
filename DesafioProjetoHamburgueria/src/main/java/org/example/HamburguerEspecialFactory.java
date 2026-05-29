@@ -24,4 +24,9 @@ public class HamburguerEspecialFactory implements HamburguerFactory {
         return lanche;
     }
 
+    @Override
+    public String aceitar(HamburguerFactoryVisitor visitor) {
+        return visitor.exibirHamburguerEspecial(this);
+    }
+
 }

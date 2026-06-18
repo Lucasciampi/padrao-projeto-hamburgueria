@@ -12,10 +12,10 @@ class ResumoCardapioTest {
     @BeforeEach
     void setUp() {
         categoria = new CategoriaCardapio("Hambúrgueres");
-        categoria.addItem(new ItemSimples("HamgurguerEspecial", 27.0));
-        categoria.addItem(new ItemSimples("HamgurguerBasico", 14.5));
-        categoria.addItem(new ItemSimples("X-Tudo", 32.0));
-        categoria.addItem(new ItemSimples("X-Salada", 10.0));
+        categoria.addItem(new ItemSimples(new LancheBase("HamgurguerEspecial", 27.0)));
+        categoria.addItem(new ItemSimples(new LancheBase("HamgurguerBasico", 14.5)));
+        categoria.addItem(new ItemSimples(new LancheBase("X-Tudo", 32.0)));
+        categoria.addItem(new ItemSimples(new LancheBase("X-Salada", 10.0)));
     }
 
     @Test

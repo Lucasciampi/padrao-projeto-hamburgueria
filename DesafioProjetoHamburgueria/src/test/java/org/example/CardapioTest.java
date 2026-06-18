@@ -8,39 +8,41 @@ class CardapioTest {
 
     @Test
     void deveRetornarCardapioCompleto() {
-        CategoriaCardapio categoriaCardapio1 = new CategoriaCardapio("Bebidas");
-        ItemSimples itemSimples11 = new ItemSimples("Refrigerante", 2.50);
-        categoriaCardapio1.addItem(itemSimples11);
+        CategoriaCardapio bebidas = new CategoriaCardapio("Bebidas");
+        ItemSimples refrigerante = new ItemSimples(new LancheBase("Refrigerante", 2.50));
+        bebidas.addItem(refrigerante);
 
-        CategoriaCardapio categoriaCardapio2 = new CategoriaCardapio("Hambúrgueres");
-        ItemSimples itemSimples21 = new ItemSimples("HamgurguerBasico", 14.50);
-        ItemSimples itemSimples22 = new ItemSimples("HamgurguerEspecial", 27.00);
-        categoriaCardapio2.addItem(itemSimples21);
-        categoriaCardapio2.addItem(itemSimples22);
+        CategoriaCardapio hamburgueres = new CategoriaCardapio("Hambúrgueres");
+        ItemSimples hamgurguerBasico = new ItemSimples(LancheBasicoFactory.getInstance().prepararLanche());
+        ItemSimples hamgurguerEspecial = new ItemSimples(LancheEspecialFactory.getInstance().prepararLanche());
+        hamburgueres.addItem(hamgurguerBasico);
+        hamburgueres.addItem(hamgurguerEspecial);
 
-        CategoriaCardapio categoriaCardapio3 = new CategoriaCardapio("Acompanhamento");
-        ItemSimples itemSimples31 = new ItemSimples("Batata Frita", 4.00);
-        ItemSimples itemSimples32 = new ItemSimples("Batata Rustica", 6.00);
-        categoriaCardapio3.addItem(itemSimples31);
-        categoriaCardapio3.addItem(itemSimples32);
+        CategoriaCardapio acompanhamento = new CategoriaCardapio("Acompanhamento");
+        ItemSimples batataFrita = new ItemSimples(new LancheBase("Batata Frita", 4.00));
+        ItemSimples batataRustica = new ItemSimples(new LancheBase("Batata Rústica", 6.00));
+        acompanhamento.addItem(batataFrita);
+        acompanhamento.addItem(batataRustica);
 
         CategoriaCardapio itemsCardapio = new CategoriaCardapio("Cardapio da Hamburgueria");
-        itemsCardapio.addItem(categoriaCardapio1);
-        itemsCardapio.addItem(categoriaCardapio2);
-        itemsCardapio.addItem(categoriaCardapio3);
+        itemsCardapio.addItem(bebidas);
+        itemsCardapio.addItem(hamburgueres);
+        itemsCardapio.addItem(acompanhamento);
 
         Cardapio cardapio = new Cardapio();
         cardapio.setItemCardapio(itemsCardapio);
 
-        assertEquals("Categoria: Cardapio da Hamburgueria\n" +
-                "Categoria: Bebidas\n" +
-                "Refrigerante - R$ 2.5\n" +
-                "Categoria: Hambúrgueres\n" +
-                "HamgurguerBasico - R$ 14.5\n" +
-                "HamgurguerEspecial - R$ 27.0\n" +
-                "Categoria: Acompanhamento\n" +
-                "Batata Frita - R$ 4.0\n" +
-                "Batata Rustica - R$ 6.0\n", cardapio.getCardapio());
+        assertEquals("""
+                Categoria: Cardapio da Hamburgueria
+                Categoria: Bebidas
+                Refrigerante - R$ 2.5
+                Categoria: Hambúrgueres
+                Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface - R$ 14.5
+                Hamburguer Especial: Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho - R$ 27.0
+                Categoria: Acompanhamento
+                Batata Frita - R$ 4.0
+                Batata Rústica - R$ 6.0
+                """, cardapio.getCardapio());
 
     }
 
@@ -55,6 +57,5 @@ class CardapioTest {
             assertEquals("Cardápio não pode ser nulo", e.getMessage());
         }
     }
-
 
 }

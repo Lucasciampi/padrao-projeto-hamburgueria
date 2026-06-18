@@ -2,24 +2,20 @@ package org.example;
 
 public class ItemSimples extends ItemCardapio {
 
-    private double preco;
+    private Lanche lanche;
 
-    public ItemSimples(String descricao, double preco) {
-        super(descricao);
-        this.preco = preco;
+    public ItemSimples(Lanche lanche) {
+        super(lanche.getDescricao());
+        this.lanche = lanche;
     }
 
     public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
+        return lanche.getPreco();
     }
 
     @Override
     public String getConteudo() {
-        return getDescricao() + " - R$ " + preco + "\n";
+        return getDescricao() + " - R$ " + getPreco() + "\n";
     }
 
 }

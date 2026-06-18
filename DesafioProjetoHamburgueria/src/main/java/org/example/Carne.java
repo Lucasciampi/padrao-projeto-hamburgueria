@@ -1,11 +1,11 @@
 package org.example;
 
-public abstract class Carne extends HamburguerDecorator {
+public abstract class Carne extends LancheDecorator {
 
     private PontoCarne ponto;
 
-    public Carne(Hamburguer hamburguer, PontoCarne pontoCarne) {
-        super(hamburguer);
+    public Carne(Lanche lanche, PontoCarne pontoCarne) {
+        super(lanche);
         this.ponto = pontoCarne;
     }
 

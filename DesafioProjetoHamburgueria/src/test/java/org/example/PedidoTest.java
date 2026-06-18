@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PedidoTest {
 
-    private HamburguerFactory factory;
+    private LancheFactory factory;
     private Pedido pedido;
     DescontoBaixo descontoBaixo;
     DescontoMedio descontoMedio;
@@ -15,7 +15,7 @@ public class PedidoTest {
 
     @BeforeEach
     void setUp() {
-        factory = HamburguerEspecialFactory.getInstance();
+        factory = LancheEspecialFactory.getInstance();
         pedido = new Pedido(factory);
         descontoAlto = new DescontoAlto(null);
         descontoMedio = new DescontoMedio(descontoAlto);
@@ -23,16 +23,16 @@ public class PedidoTest {
     }
 
     @Test
-    void deveRetornarDescricaoDoHamburguerEspecial() {
-        String descricaoEsperada = "Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho";
+    void deveRetornarDescricaoDoLancheEspecial() {
+        String descricaoEsperada = "Hamburguer Especial: Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
     @Test
-    void deveRetornarDescricaomDoHamburguerBasico() {
-        factory = HamburguerBasicoFactory.getInstance();
+    void deveRetornarDescricaomDoLancheBasico() {
+        factory = LancheBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
-        String descricaoEsperada = "Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface";
+        String descricaoEsperada = "Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
@@ -382,11 +382,11 @@ public class PedidoTest {
 
     @Test
     void deveProcessarPagamentoComCartao(){
-        // Hamburguer Básico
-        factory = HamburguerBasicoFactory.getInstance();
+        // Lanche Básico
+        factory = LancheBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
+        calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
         assertEquals("Pagamento de R$ 14.5 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
     }
 
@@ -400,7 +400,7 @@ public class PedidoTest {
     @Test
     void deveProcessarPagamentoCartaoParcelado(){
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(FormaPagamentoCartaoParcelado.getInstance());
+        calculador.setFormaPagamento(FormaPagamentoCredito.getInstance());
         assertEquals("Pagamento de R$ 27.0 processado via Cartão de Crédito parcelado.", calculador.realizarPagamento(pedido));
     }
 
@@ -418,7 +418,7 @@ public class PedidoTest {
     @Test
     void deveProcessarPagamentoCartaoComDescontoBaixo(){
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(FormaPagamentoCartao.getInstance());
+        calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
         assertEquals("Pagamento de R$ 25.65 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
     }
@@ -442,7 +442,7 @@ public class PedidoTest {
     @Test
     void deveProcessarPagamentoCartaoParceladoSemDesconto(){
         CalcularValorPagamento calculador = new CalcularValorPagamento();
-        calculador.setFormaPagamento(FormaPagamentoCartaoParcelado.getInstance());
+        calculador.setFormaPagamento(FormaPagamentoCredito.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
         assertEquals("Pagamento de R$ 27.0 processado via Cartão de Crédito parcelado.", calculador.realizarPagamento(pedido));
     }

@@ -1,14 +1,14 @@
 package org.example;
 
-public class FormaPagamentoCartao implements FormaPagamento{
+public class FormaPagamentoDebito implements FormaPagamento{
 
-    private static FormaPagamentoCartao instance;
+    private static FormaPagamentoDebito instance;
 
-    private FormaPagamentoCartao() {}
+    private FormaPagamentoDebito() {}
 
-    public static FormaPagamentoCartao getInstance() {
+    public static FormaPagamentoDebito getInstance() {
         if (instance == null) {
-            instance = new FormaPagamentoCartao();
+            instance = new FormaPagamentoDebito();
         }
         return instance;
     }

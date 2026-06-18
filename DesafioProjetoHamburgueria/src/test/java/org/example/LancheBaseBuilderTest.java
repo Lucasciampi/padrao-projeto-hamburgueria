@@ -5,19 +5,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HamburguerBaseBuilderTest {
+class LancheBaseBuilderTest {
 
-    private HamburguerBaseBuilder hamburguerBaseBuilder;
+    private LancheBaseBuilder lancheBaseBuilder;
 
     @BeforeEach
     void setUp() {
-        hamburguerBaseBuilder = new HamburguerBaseBuilder();
+        lancheBaseBuilder = new LancheBaseBuilder();
     }
 
     @Test
-    void deveRetornarExcecaoParaHamburguerBaseSemDescricao() {
+    void deveRetornarExcecaoParaLancheBaseSemDescricao() {
         try {
-            HamburguerBase hamburguerBase = hamburguerBaseBuilder
+            LancheBase lancheBase = lancheBaseBuilder
                     .setPreco(10.0)
                     .build();
             fail();
@@ -27,9 +27,9 @@ class HamburguerBaseBuilderTest {
     }
 
     @Test
-    void deveRetornarExcecaoParaHamburguerBaseSemPreco() {
+    void deveRetornarExcecaoParaLancheBaseSemPreco() {
         try {
-            HamburguerBase hamburguerBase = hamburguerBaseBuilder
+            LancheBase lancheBase = lancheBaseBuilder
                     .setDescricao("Pão de Batata")
                     .build();
             fail();
@@ -39,12 +39,12 @@ class HamburguerBaseBuilderTest {
     }
 
     @Test
-    void deveRetornarHamburguerBaseValido() {
-        HamburguerBase hamburguerBase = hamburguerBaseBuilder
+    void deveRetornarLancheBaseValido() {
+        LancheBase lancheBase = lancheBaseBuilder
                 .setDescricao("Pão de Batata")
                 .setPreco(10.0)
                 .build();
-        assertNotNull(hamburguerBase);
+        assertNotNull(lancheBase);
     }
 
 }

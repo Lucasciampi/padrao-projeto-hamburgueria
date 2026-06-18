@@ -3,7 +3,7 @@ package org.example;
 public class DescontoBaixo extends Desconto{
 
     public DescontoBaixo(Desconto maiorDesconto) {
-        listaFormaPagamento.add(FormaPagamentoCartao.getInstance());
+        listaFormaPagamento.add(FormaPagamentoDebito.getInstance());
         setMaiorDesconto(maiorDesconto);
     }
 

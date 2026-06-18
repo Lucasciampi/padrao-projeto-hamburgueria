@@ -1,12 +1,12 @@
 package org.example;
 
-public class HamburguerBase implements Hamburguer {
+public class LancheBase implements Lanche {
     private String descricao;
     private double preco;
 
-    public HamburguerBase() {}
+    public LancheBase() {}
 
-    public HamburguerBase(String descricao, double preco) {
+    public LancheBase(String descricao, double preco) {
         this.descricao = descricao;
         this.preco = preco;
     }

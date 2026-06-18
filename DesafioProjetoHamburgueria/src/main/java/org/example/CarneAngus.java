@@ -2,8 +2,8 @@ package org.example;
 
 public class CarneAngus extends Carne{
 
-    public CarneAngus(Hamburguer hamburguer, PontoCarne pontoCarne) {
-        super(hamburguer, pontoCarne);
+    public CarneAngus(Lanche lanche, PontoCarne pontoCarne) {
+        super(lanche, pontoCarne);
     }
 
     @Override

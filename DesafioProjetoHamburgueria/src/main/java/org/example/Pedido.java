@@ -4,15 +4,15 @@ import java.util.Observable;
 
 public class Pedido extends Observable implements Cloneable {
 
-    private Hamburguer lanche;
+    private Lanche lanche;
     private PedidoEstado estado;
 
-    public Pedido(HamburguerFactory factory) {
+    public Pedido(LancheFactory factory) {
         this.lanche = factory.prepararLanche();
         this.setEstado(PedidoEstadoAceito.getInstance());
     }
 
-    public Hamburguer getLanche() {
+    public Lanche getLanche() {
         return lanche;
     }
 

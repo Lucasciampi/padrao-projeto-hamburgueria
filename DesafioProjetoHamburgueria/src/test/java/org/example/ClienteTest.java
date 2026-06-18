@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClienteTest {
 
     private Cliente cliente;
-    private HamburguerFactory factory;
+    private LancheFactory factory;
     private Pedido pedido;
 
     @BeforeEach
     void setUp() {
         cliente = new Cliente();
-        factory = HamburguerEspecialFactory.getInstance();
+        factory = LancheEspecialFactory.getInstance();
         pedido = new Pedido(factory);
     }
 
@@ -45,7 +45,7 @@ class ClienteTest {
 
     @Test
     void deveArmazenarPedidos() {
-        Pedido pedido2 = new Pedido(HamburguerBasicoFactory.getInstance());
+        Pedido pedido2 = new Pedido(LancheBasicoFactory.getInstance());
         cliente.registrarPedido(pedido);
         cliente.registrarPedido(pedido2);
         assertEquals(2, cliente.getHistorico().size());

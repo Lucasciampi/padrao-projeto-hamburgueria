@@ -1,9 +1,9 @@
 package org.example;
 
-public class Molho extends HamburguerDecorator{
+public class Molho extends LancheDecorator {
 
-    public Molho(Hamburguer hamburguer) {
-        super(hamburguer);
+    public Molho(Lanche lanche) {
+        super(lanche);
     }
 
     @Override

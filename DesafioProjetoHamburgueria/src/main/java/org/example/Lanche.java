@@ -1,6 +1,6 @@
 package org.example;
 
-public interface Hamburguer {
+public interface Lanche {
     String getDescricao();
     double getPreco();
 }

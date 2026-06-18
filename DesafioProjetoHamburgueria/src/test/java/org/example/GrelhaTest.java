@@ -20,13 +20,13 @@ class GrelhaTest {
     @Test
     void deveRetornarCarnes() {
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
                 "CarneAcem", "AoPonto");
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
 
         List<String> saida = Arrays.asList(
@@ -41,13 +41,13 @@ class GrelhaTest {
     @Test
     void deveRetornarTotalPontos() {
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
                 "CarneAcem", "AoPonto");
         grelha.adicionarCarne(
-                new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
 
         assertEquals(2, PontoCarneFactory.getTotalPontos());
@@ -57,7 +57,7 @@ class GrelhaTest {
     void deveRetornarExcecaoParaPontoInexistente() {
         try {
             grelha.adicionarCarne(
-                    new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                    new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                     "CarneAngus", "Grelhado");
             fail();
         } catch (IllegalArgumentException e) {
@@ -69,7 +69,7 @@ class GrelhaTest {
     void deveRetornarExcecaoParaCarneInexistente() {
         try {
             grelha.adicionarCarne(
-                    new HamburguerBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
+                    new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                     "CarneFrango", "AoPonto");
             fail();
         } catch (IllegalArgumentException e) {

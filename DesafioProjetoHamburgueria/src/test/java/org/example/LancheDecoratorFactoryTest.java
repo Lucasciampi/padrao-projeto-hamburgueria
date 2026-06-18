@@ -4,22 +4,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HamburguerDecoratorFactoryTest {
+class LancheDecoratorFactoryTest {
 
     @Test
     void deveRetornarExcecaoParaIngredienteInexistente() {
         try {
-            HamburguerDecoratorFactory.getInstance().obterIngrediente("Carne de Frango", new HamburguerBase());
+            LancheDecoratorFactory.getInstance().obterIngrediente("Carne de Frango", new LancheBase());
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Tipo de Ingrediente do Hamburguer não encontrado.", e.getMessage());
+            assertEquals("Tipo de Ingrediente do Lanche não encontrado.", e.getMessage());
         }
     }
 
     @Test
     void deveRetornarExcecaoParaIngredienteInvalido() {
         try {
-            HamburguerDecoratorFactory.getInstance().obterIngrediente("Tomate", new HamburguerBase());
+            LancheDecoratorFactory.getInstance().obterIngrediente("Tomate", new LancheBase());
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Ingrediente inválido.", e.getMessage());

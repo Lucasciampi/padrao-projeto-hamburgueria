@@ -2,7 +2,7 @@ package org.example;
 
 public class Tomate {
 
-    public Tomate(Hamburguer hamburguer) {
+    public Tomate(Lanche lanche) {
     }
 
     public String getDescricao() {

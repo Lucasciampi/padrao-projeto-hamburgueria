@@ -37,7 +37,7 @@ class CardapioTest {
                 Categoria: Bebidas
                 Refrigerante - R$ 2.5
                 Categoria: Hambúrgueres
-                Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface - R$ 14.5
+                Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface + Tomate - R$ 15.0
                 Hamburguer Especial: Pão Brioche + Carne Angus (Mal Passado) + Queijo + Bacon + Molho - R$ 27.0
                 Categoria: Acompanhamento
                 Batata Frita - R$ 4.0

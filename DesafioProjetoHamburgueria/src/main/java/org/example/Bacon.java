@@ -1,14 +1,14 @@
 package org.example;
 
-public class Bacon extends LancheDecorator {
+public class Bacon extends Ingrediente {
 
     public Bacon(Lanche lanche) {
         super(lanche);
     }
 
     @Override
-    public String getDescricao() {
-        return super.getDescricao() + " + Bacon";
+    public String getNomeIngrediente() {
+        return "Bacon";
     }
 
     @Override

@@ -19,6 +19,7 @@ public class LancheBasicoFactory implements LancheFactory {
         Lanche lanche = new CarneAcem(new LancheBase("Hamburguer Basico: Pão de Batata", 4.0), new AoPonto());
         lanche = LancheDecoratorFactory.getInstance().obterIngrediente("Queijo", lanche);
         lanche = LancheDecoratorFactory.getInstance().obterIngrediente("Alface", lanche);
+        lanche = LancheDecoratorFactory.getInstance().obterIngrediente("Tomate", lanche);
 
         return lanche;
     }

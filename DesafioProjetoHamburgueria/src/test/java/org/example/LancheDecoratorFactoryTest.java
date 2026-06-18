@@ -19,7 +19,7 @@ class LancheDecoratorFactoryTest {
     @Test
     void deveRetornarExcecaoParaIngredienteInvalido() {
         try {
-            LancheDecoratorFactory.getInstance().obterIngrediente("Tomate", new LancheBase());
+            LancheDecoratorFactory.getInstance().obterIngrediente("ItemSimples", new LancheBase());
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Ingrediente inválido.", e.getMessage());

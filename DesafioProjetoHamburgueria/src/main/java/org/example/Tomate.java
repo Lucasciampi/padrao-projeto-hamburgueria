@@ -1,14 +1,15 @@
 package org.example;
 
-public class Tomate {
+public class Tomate extends Ingrediente {
 
     public Tomate(Lanche lanche) {
+        super(lanche);
     }
 
-    public String getDescricao() {
-        return " + Tomate";
+    @Override
+    public String getNomeIngrediente() {
+        return "Tomate";
     }
-
 
     public double getPrecoIngrediente() {
         return 0.50;

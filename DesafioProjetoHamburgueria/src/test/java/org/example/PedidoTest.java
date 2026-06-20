@@ -405,6 +405,13 @@ public class PedidoTest {
     }
 
     @Test
+    void deveProcessarPagamentoComPontos(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoPontos.getInstance());
+        assertEquals("Pagamento de R$ 27.0 processado via Pontos de Fidelidade.", calculador.realizarPagamento(pedido));
+    }
+
+    @Test
     void nãoDeveConterFormaDePagamento(){
         try {
             CalcularValorPagamento calculador = new CalcularValorPagamento();
@@ -496,6 +503,11 @@ public class PedidoTest {
         calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
         assertEquals("Pagamento de R$ 32.65 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedidoCombo));
+    }
+
+    @Test
+    void deveRetornarPontosFidelidadeDoPedido() {
+        assertEquals(270, pedido.getPontosFidelidade());
     }
 
 }

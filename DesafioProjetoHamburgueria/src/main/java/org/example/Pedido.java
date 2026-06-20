@@ -4,6 +4,7 @@ import java.util.Observable;
 
 public class Pedido extends Observable implements Cloneable {
 
+    private PrecoAdapter precoAdapter;
     private Lanche lanche;
     private Bebida bebida;
     private PedidoEstado estado;
@@ -95,6 +96,14 @@ public class Pedido extends Observable implements Cloneable {
 
     public String toString() {
         return this.getNomeEstado();
+    }
+
+    public int getPontosFidelidade() {
+        IPreco precoBRL = new PrecoBRL();
+        precoBRL.setPreco(this.getValorTotal());
+        precoAdapter = new PrecoAdapter(precoBRL);
+        precoAdapter.salvarPreco();
+        return precoAdapter.getPontos();
     }
 
 }

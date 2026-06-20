@@ -95,4 +95,36 @@ class ClienteTest {
         assertEquals(pedidoCombo.getBebida().getDescricao(), pedidoRepetido.getBebida().getDescricao());
     }
 
+    @Test
+    void deveAcumularPontosAoRegistrarPedido() {
+        cliente.registrarPedido(pedido);
+        assertEquals(270, cliente.getSaldoPontos());
+    }
+
+    @Test
+    void deveAcumularPontosDeMultiplosPedidos() {
+        Pedido pedido2 = new Pedido(LancheBasicoFactory.getInstance());
+        cliente.registrarPedido(pedido);
+        cliente.registrarPedido(pedido2);
+        assertEquals(pedido.getPontosFidelidade() + pedido2.getPontosFidelidade(), cliente.getSaldoPontos());
+    }
+
+    @Test
+    void deveUsarPontos() {
+        cliente.registrarPedido(pedido); // 270 pontos
+        cliente.usarPontos(100);
+        assertEquals(170, cliente.getSaldoPontos());
+    }
+
+    @Test
+    void deveRetornarExcecaoSaldoInsuficiente() {
+        cliente.registrarPedido(pedido); // 270 pontos
+        try {
+            cliente.usarPontos(500);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Saldo de pontos insuficiente", e.getMessage());
+        }
+    }
+
 }

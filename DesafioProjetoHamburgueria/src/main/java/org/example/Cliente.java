@@ -6,9 +6,22 @@ import java.util.List;
 public class Cliente extends Pessoa {
 
     private List<Pedido> historico = new ArrayList<>();
+    private int saldoPontos = 0;
 
     public void registrarPedido(Pedido pedido) {
         this.historico.add(pedido);
+        this.saldoPontos += pedido.getPontosFidelidade();
+    }
+
+    public int getSaldoPontos() {
+        return saldoPontos;
+    }
+
+    public void usarPontos(int pontos) {
+        if (pontos > this.saldoPontos) {
+            throw new IllegalArgumentException("Saldo de pontos insuficiente");
+        }
+        this.saldoPontos -= pontos;
     }
 
     public Pedido repetirPedido(int indice) throws CloneNotSupportedException {

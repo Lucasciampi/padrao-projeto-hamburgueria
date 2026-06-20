@@ -17,7 +17,7 @@ public class CalcularValorPagamento {
         if (this.formaPagamento == null) {
             throw new IllegalStateException("Forma de pagamento não definida.");
         }
-        double valorBase = pedido.getLanche().getPreco();
+        double valorBase = pedido.getValorTotal();
         double descontoTotal = 0.0;
         if (this.cadeiaDeDescontos != null) {
             Pagamento pagamento = new Pagamento(this.formaPagamento);

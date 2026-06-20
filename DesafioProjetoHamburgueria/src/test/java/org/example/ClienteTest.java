@@ -87,4 +87,12 @@ class ClienteTest {
         assertEquals("Em Preparação", pedidoRepetido.getNomeEstado());
     }
 
+    @Test
+    void deveRepetirPedidoComboComMesmaBebida() throws CloneNotSupportedException {
+        Pedido pedidoCombo = new Pedido(ComboEspecialFactory.getInstance());
+        cliente.registrarPedido(pedidoCombo);
+        Pedido pedidoRepetido = cliente.repetirPedido(0);
+        assertEquals(pedidoCombo.getBebida().getDescricao(), pedidoRepetido.getBebida().getDescricao());
+    }
+
 }

@@ -15,7 +15,7 @@ public class FormaPagamentoDebito implements FormaPagamento{
 
     @Override
     public String pagar(double valor) {
-        return "Pagamento de R$ " + valor + " processado via Cartão de Crédito à vista.";
+        return "Pagamento de R$ " + valor + " processado via Cartão de Débito à vista.";
     }
 
 }

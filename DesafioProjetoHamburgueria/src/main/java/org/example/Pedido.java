@@ -5,11 +5,30 @@ import java.util.Observable;
 public class Pedido extends Observable implements Cloneable {
 
     private Lanche lanche;
+    private Bebida bebida;
     private PedidoEstado estado;
 
     public Pedido(LancheFactory factory) {
         this.lanche = factory.prepararLanche();
         this.setEstado(PedidoEstadoAceito.getInstance());
+    }
+
+    public Pedido(ComboFactory factory) {
+        this.lanche = factory.prepararLanche();
+        this.bebida = factory.prepararBebida();
+        this.setEstado(PedidoEstadoAceito.getInstance());
+    }
+
+    public double getValorTotal() {
+        double valor = lanche.getPreco();
+        if (bebida != null) {
+            valor += bebida.getPreco();
+        }
+        return valor;
+    }
+
+    public Bebida getBebida() {
+        return bebida;
     }
 
     public Lanche getLanche() {

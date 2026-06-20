@@ -387,7 +387,7 @@ public class PedidoTest {
         Pedido pedido = new Pedido(factory);
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
-        assertEquals("Pagamento de R$ 15.0 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
+        assertEquals("Pagamento de R$ 15.0 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -420,7 +420,7 @@ public class PedidoTest {
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
-        assertEquals("Pagamento de R$ 25.65 processado via Cartão de Crédito à vista.", calculador.realizarPagamento(pedido));
+        assertEquals("Pagamento de R$ 25.65 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedido));
     }
 
     @Test
@@ -462,6 +462,40 @@ public class PedidoTest {
     @Test
     void deveRetornarPedidoSemPendencias() {
         assertEquals(true,pedido.verificarPendencias());
+    }
+
+    @Test
+    void deveRetornarValorTotalSemBebida() {
+        assertEquals(27.0, pedido.getValorTotal());
+    }
+
+    @Test
+    void deveRetornarValorTotalComSuco() {
+        Pedido pedidoCombo = new Pedido(ComboEspecialFactory.getInstance());
+        assertEquals(34.0, pedidoCombo.getValorTotal());
+    }
+
+    @Test
+    void deveRetornarValorTotalComRefrigerante() {
+        Pedido pedidoCombo = new Pedido(ComboBasicoFactory.getInstance());
+        assertEquals(20.0, pedidoCombo.getValorTotal());
+    }
+
+    @Test
+    void deveProcessarPagamentoComboComPix() {
+        Pedido pedidoCombo = new Pedido(ComboEspecialFactory.getInstance());
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoPix.getInstance());
+        assertEquals("Pagamento de R$ 34.0 processado via PIX.", calculador.realizarPagamento(pedidoCombo));
+    }
+
+    @Test
+    void deveProcessarPagamentoComboComDescontoBaixo() {
+        Pedido pedidoCombo = new Pedido(ComboEspecialFactory.getInstance());
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        assertEquals("Pagamento de R$ 32.65 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedidoCombo));
     }
 
 }

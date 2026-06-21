@@ -106,7 +106,7 @@ class ClienteTest {
         Pedido pedido2 = new Pedido(LancheBasicoFactory.getInstance());
         cliente.registrarPedido(pedido);
         cliente.registrarPedido(pedido2);
-        assertEquals(pedido.getPontosFidelidade() + pedido2.getPontosFidelidade(), cliente.getSaldoPontos());
+        assertEquals(CalculadoraFidelidade.calcularPontos(pedido) + CalculadoraFidelidade.calcularPontos(pedido2), cliente.getSaldoPontos());
     }
 
     @Test

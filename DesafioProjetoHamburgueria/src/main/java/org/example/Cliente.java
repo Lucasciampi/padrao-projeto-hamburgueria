@@ -10,7 +10,7 @@ public class Cliente extends Pessoa {
 
     public void registrarPedido(Pedido pedido) {
         this.historico.add(pedido);
-        this.saldoPontos += pedido.getPontosFidelidade();
+        this.saldoPontos += CalculadoraFidelidade.calcularPontos(pedido);
     }
 
     public int getSaldoPontos() {

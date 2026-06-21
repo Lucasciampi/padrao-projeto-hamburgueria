@@ -507,7 +507,7 @@ public class PedidoTest {
 
     @Test
     void deveRetornarPontosFidelidadeDoPedido() {
-        assertEquals(270, pedido.getPontosFidelidade());
+        assertEquals(270, CalculadoraFidelidade.calcularPontos(pedido));
     }
 
 }

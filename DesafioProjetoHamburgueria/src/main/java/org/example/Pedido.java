@@ -1,9 +1,12 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 
-public class Pedido extends Observable implements Cloneable {
+public class Pedido extends Observable implements Cloneable, IPedido {
 
+    private int id;
     private PrecoAdapter precoAdapter;
     private Lanche lanche;
     private Bebida bebida;
@@ -18,6 +21,14 @@ public class Pedido extends Observable implements Cloneable {
         this.lanche = factory.prepararLanche();
         this.bebida = factory.prepararBebida();
         this.setEstado(PedidoEstadoAceito.getInstance());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getValorTotal() {
@@ -104,6 +115,16 @@ public class Pedido extends Observable implements Cloneable {
         precoAdapter = new PrecoAdapter(precoBRL);
         precoAdapter.salvarPreco();
         return precoAdapter.getPontos();
+    }
+
+    @Override
+    public List<String> obterDadosPedido() {
+        return Arrays.asList(this.lanche.getDescricao(), this.getNomeEstado());
+    }
+
+    @Override
+    public double obterValorPagamento(Funcionario funcionario) {
+        return this.getValorTotal();
     }
 
 }

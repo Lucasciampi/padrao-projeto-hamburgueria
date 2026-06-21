@@ -26,7 +26,7 @@ class PedidoProxyTest {
 
     @Test
     void deveRetornarValorPagamentoPedido() {
-        Funcionario funcionario = new Funcionario("Ana", true);
+        Funcionario funcionario = new Funcionario("Funcionario", true);
         PedidoProxy pedido = new PedidoProxy(2);
 
         assertEquals(27.0, pedido.obterValorPagamento(funcionario));
@@ -35,7 +35,7 @@ class PedidoProxyTest {
     @Test
     void deveRetornarExcecaoFuncionarioNaoAutorizado() {
         try {
-            Funcionario funcionario = new Funcionario("Joana", false);
+            Funcionario funcionario = new Funcionario("Funcionario sem autorização", false);
             PedidoProxy pedido = new PedidoProxy(2);
 
             pedido.obterValorPagamento(funcionario);

@@ -127,4 +127,22 @@ class ClienteTest {
         }
     }
 
+    @Test
+    void deveDesfazerUsoDePontos() {
+        cliente.registrarPedido(pedido); // 270 pontos
+        cliente.usarPontos(100); // saldo: 170, snapshot salvo com 270
+        cliente.desfazerUsoPontos();
+        assertEquals(270, cliente.getSaldoPontos());
+    }
+
+    @Test
+    void deveRetornarExcecaoAoDesfazerSemHistoricoDeSaldo() {
+        try {
+            cliente.desfazerUsoPontos();
+            fail();
+        } catch (IllegalStateException e) {
+            assertEquals("Não há saldo anterior para restaurar", e.getMessage());
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ public class CalcularValorPagamento {
 
     private FormaPagamento formaPagamento;
     private Desconto cadeiaDeDescontos;
+    private String formulaPromocao;
 
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
@@ -11,6 +12,10 @@ public class CalcularValorPagamento {
 
     public void setCadeiaDeDescontos(Desconto cadeiaDeDescontos) {
         this.cadeiaDeDescontos = cadeiaDeDescontos;
+    }
+
+    public void setFormulaPromocao(String formulaPromocao) {
+        this.formulaPromocao = formulaPromocao;
     }
 
     public String realizarPagamento(Pedido pedido) {
@@ -24,6 +29,11 @@ public class CalcularValorPagamento {
             descontoTotal = this.cadeiaDeDescontos.calcularDesconto(pedido, pagamento);
         }
         double valorFinal = valorBase - descontoTotal;
+
+        if (this.formulaPromocao != null) {
+            valorFinal = PromocaoCalculadora.calcularValorComPromocao(valorFinal, this.formulaPromocao);
+        }
+
         return this.formaPagamento.pagar(valorFinal);
     }
 

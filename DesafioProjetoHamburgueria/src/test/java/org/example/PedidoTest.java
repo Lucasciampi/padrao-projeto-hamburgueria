@@ -510,4 +510,23 @@ public class PedidoTest {
         assertEquals(270, CalculadoraFidelidade.calcularPontos(pedido));
     }
 
+    @Test
+    void deveProcessarPagamentoComPromocao(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoPix.getInstance());
+        calculador.setFormulaPromocao("valor * 0.8 + 2");
+        // 27.0 -> (27.0 * 0.8) + 2 = 23.6
+        assertEquals("Pagamento de R$ 23.6 processado via PIX.", calculador.realizarPagamento(pedido));
+    }
+
+    @Test
+    void deveProcessarPagamentoComDescontoEPromocao(){
+        CalcularValorPagamento calculador = new CalcularValorPagamento();
+        calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
+        calculador.setCadeiaDeDescontos(descontoBaixo);
+        calculador.setFormulaPromocao("valor - 1");
+        // 27.0 - 5% = 25.65, 25.65 - 1 = 24.65
+        assertEquals("Pagamento de R$ 24.65 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedido));
+    }
+
 }

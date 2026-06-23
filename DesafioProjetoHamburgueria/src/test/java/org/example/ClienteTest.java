@@ -67,8 +67,16 @@ class ClienteTest {
         pedido.pronto();
         cliente.registrarPedido(pedido);
         Pedido pedidoRepetido = cliente.repetirPedido(0);
-        assertEquals("Pronto", pedido.getNomeEstado());
         assertEquals("Aceito", pedidoRepetido.getNomeEstado());
+    }
+
+    @Test
+    void naoDeveAlterarEstadoDoPedidoOriginalAoRepetir() throws CloneNotSupportedException {
+        pedido.preparar();
+        pedido.pronto();
+        cliente.registrarPedido(pedido);
+        cliente.repetirPedido(0);
+        assertEquals("Pronto", pedido.getNomeEstado());
     }
 
     @Test
@@ -83,7 +91,6 @@ class ClienteTest {
         cliente.registrarPedido(pedido);
         Pedido pedidoRepetido = cliente.repetirPedido(0);
         pedidoRepetido.preparar();
-        assertEquals("Aceito", pedido.getNomeEstado());
         assertEquals("Em Preparação", pedidoRepetido.getNomeEstado());
     }
 

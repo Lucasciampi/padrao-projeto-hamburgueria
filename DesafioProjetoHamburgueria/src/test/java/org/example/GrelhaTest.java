@@ -24,14 +24,14 @@ class GrelhaTest {
                 "CarneAngus", "MalPassado");
         grelha.adicionarCarne(
                 new LancheBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
-                "CarneAcem", "AoPonto");
+                "CarnePatinho", "AoPonto");
         grelha.adicionarCarne(
                 new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
 
         List<String> saida = Arrays.asList(
                 "Pão Brioche + Carne Angus (Mal Passado)",
-                "Pão de Batata + Carne Acém (Ao Ponto)",
+                "Pão de Batata + Carne Patinho (Ao Ponto)",
                 "Pão Brioche + Carne Angus (Mal Passado)"
         );
 
@@ -45,7 +45,7 @@ class GrelhaTest {
                 "CarneAngus", "MalPassado");
         grelha.adicionarCarne(
                 new LancheBaseBuilder().setDescricao("Pão de Batata").setPreco(4.0).build(),
-                "CarneAcem", "AoPonto");
+                "CarnePatinho", "AoPonto");
         grelha.adicionarCarne(
                 new LancheBaseBuilder().setDescricao("Pão Brioche").setPreco(8.0).build(),
                 "CarneAngus", "MalPassado");
@@ -75,7 +75,5 @@ class GrelhaTest {
         } catch (IllegalArgumentException e) {
             assertEquals("Carne não encontrada: CarneFrango", e.getMessage());        }
     }
-
-
 
 }

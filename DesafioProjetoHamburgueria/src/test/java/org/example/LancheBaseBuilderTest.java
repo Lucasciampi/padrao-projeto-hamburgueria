@@ -17,9 +17,7 @@ class LancheBaseBuilderTest {
     @Test
     void deveRetornarExcecaoParaLancheBaseSemDescricao() {
         try {
-            LancheBase lancheBase = lancheBaseBuilder
-                    .setPreco(10.0)
-                    .build();
+            lancheBaseBuilder.setPreco(10.0).build();
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Descrição inválida", e.getMessage());
@@ -29,9 +27,7 @@ class LancheBaseBuilderTest {
     @Test
     void deveRetornarExcecaoParaLancheBaseSemPreco() {
         try {
-            LancheBase lancheBase = lancheBaseBuilder
-                    .setDescricao("Pão de Batata")
-                    .build();
+            lancheBaseBuilder.setDescricao("Pão de Batata").build();
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Preço inválido", e.getMessage());

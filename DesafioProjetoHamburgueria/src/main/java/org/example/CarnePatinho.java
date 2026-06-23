@@ -1,14 +1,14 @@
 package org.example;
 
-public class CarneAcem extends Carne {
+public class CarnePatinho extends Carne {
 
-    public CarneAcem(Lanche lanche, PontoCarne ponto) {
+    public CarnePatinho(Lanche lanche, PontoCarne ponto) {
         super(lanche, ponto);
     }
 
     @Override
     public String getNomeCarne() {
-        return "Acém";
+        return "Patinho";
     }
 
     @Override

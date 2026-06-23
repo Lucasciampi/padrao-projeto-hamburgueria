@@ -14,10 +14,9 @@ class LancheInfoVisitorTest {
         visitor = new LancheInfoVisitor();
     }
 
-
     @Test
     void deveExibirLancheBasico() {
-        assertEquals("Lanche Basico{descricao = Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface + Tomate, preco = 15.0}",
+        assertEquals("Lanche Basico{descricao = Hamburguer Basico: Pão de Batata + Carne Patinho (Ao Ponto) + Queijo + Alface + Tomate, preco = 15.0}",
                 visitor.exibir(LancheBasicoFactory.getInstance()));
     }
 

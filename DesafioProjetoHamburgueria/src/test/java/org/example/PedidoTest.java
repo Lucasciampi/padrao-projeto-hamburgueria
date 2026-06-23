@@ -32,7 +32,7 @@ public class PedidoTest {
     void deveRetornarDescricaomDoLancheBasico() {
         factory = LancheBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
-        String descricaoEsperada = "Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface + Tomate";
+        String descricaoEsperada = "Hamburguer Basico: Pão de Batata + Carne Patinho (Ao Ponto) + Queijo + Alface + Tomate";
         assertEquals(descricaoEsperada, pedido.getLanche().getDescricao());
     }
 
@@ -382,7 +382,6 @@ public class PedidoTest {
 
     @Test
     void deveProcessarPagamentoComCartao(){
-        // Lanche Básico
         factory = LancheBasicoFactory.getInstance();
         Pedido pedido = new Pedido(factory);
         CalcularValorPagamento calculador = new CalcularValorPagamento();
@@ -515,7 +514,6 @@ public class PedidoTest {
         CalcularValorPagamento calculador = new CalcularValorPagamento();
         calculador.setFormaPagamento(FormaPagamentoPix.getInstance());
         calculador.setFormulaPromocao("valor * 0.8 + 2");
-        // 27.0 -> (27.0 * 0.8) + 2 = 23.6
         assertEquals("Pagamento de R$ 23.6 processado via PIX.", calculador.realizarPagamento(pedido));
     }
 
@@ -525,7 +523,6 @@ public class PedidoTest {
         calculador.setFormaPagamento(FormaPagamentoDebito.getInstance());
         calculador.setCadeiaDeDescontos(descontoBaixo);
         calculador.setFormulaPromocao("valor - 1");
-        // 27.0 - 5% = 25.65, 25.65 - 1 = 24.65
         assertEquals("Pagamento de R$ 24.65 processado via Cartão de Débito à vista.", calculador.realizarPagamento(pedido));
     }
 

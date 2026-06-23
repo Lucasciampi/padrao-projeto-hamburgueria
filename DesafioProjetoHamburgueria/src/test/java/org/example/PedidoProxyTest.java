@@ -20,7 +20,7 @@ class PedidoProxyTest {
     void deveRetornarDadosPedido() {
         PedidoProxy pedido = new PedidoProxy(1);
 
-        assertEquals(Arrays.asList("Hamburguer Basico: Pão de Batata + Carne Acém (Ao Ponto) + Queijo + Alface + Tomate", "Aceito"),
+        assertEquals(Arrays.asList("Hamburguer Basico: Pão de Batata + Carne Patinho (Ao Ponto) + Queijo + Alface + Tomate", "Aceito"),
                 pedido.obterDadosPedido());
     }
 
